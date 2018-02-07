@@ -1,6 +1,7 @@
 package com.lq.okex.task;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.http.HttpException;
 import org.slf4j.Logger;
@@ -8,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.alibaba.fastjson.JSON;
+import com.lq.okex.entity.Kline;
 import com.lq.okex.rest.stock.IStockRestApi;
 import com.lq.okex.rest.stock.impl.StockRestApi;
 import com.lq.okex.utils.RedisAPI;
@@ -24,7 +27,9 @@ public class ScheduledTasks {
 	public void getKLine() {
 		try {
 			String ltcKLine = stockGet.kline("ltc_btc", "5min");
-			logger.warn(ltcKLine);
+			ltcKLine = ltcKLine.substring(1, ltcKLine.length()-1);
+			List<Kline> klineList = JSON.parseArray(ltcKLine, Kline.class);
+			//logger.warn();
 		} catch (HttpException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
