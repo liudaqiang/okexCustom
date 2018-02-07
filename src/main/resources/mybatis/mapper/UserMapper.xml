@@ -26,7 +26,7 @@
        FROM user  
        WHERE id = #{id}  
     </select>  
-  	<select id="get" parameterType="com.lq.bite.entity.User" resultMap="BaseResultMap" > 
+  	<select id="get" parameterType="com.lq.okex.entity.User" resultMap="BaseResultMap" > 
 		SELECT 
 		<include refid="Base_Column_List" />  
 		FROM user  
@@ -36,7 +36,7 @@
 			AND yn = 0 
 		</where>
   	</select>
-    <insert id="insert" parameterType="com.lq.bite.entity.User" >  
+    <insert id="insert" parameterType="com.lq.okex.entity.User" >  
        INSERT INTO   
             user  
             (user_name, password, email,create_date,yn)   
@@ -44,7 +44,7 @@
             (#{userName}, #{password}, #{email},NOW(),0)  
     </insert>  
       
-    <update id="update" parameterType="com.lq.bite.entity.User" >  
+    <update id="update" parameterType="com.lq.okex.entity.User" >  
        UPDATE   
             user   
        SET   
