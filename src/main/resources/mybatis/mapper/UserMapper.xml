@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >  
+<mapper namespace="com.lq.bite.dao.UserDao" >  
+    <resultMap id="BaseResultMap" type="com.lq.bite.entity.User" >  
+        <id column="id" property="id" jdbcType="INTEGER" />  
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />  
+        <result column="password" property="password" jdbcType="VARCHAR"/>  
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="DATE" /> 
+        <result column="yn" property="yn" jdbcType="VARCHAR"/> 
+    </resultMap>  
+      
+    <sql id="Base_Column_List" >  
+        id,user_name,password,email,create_date,yn
+    </sql>  
+  
+    <select id="getAll" resultMap="BaseResultMap"  >  
+       SELECT   
+       <include refid="Base_Column_List" />  
+       FROM user  
+    </select>  
+  
+    <select id="getOne" parameterType="java.lang.Integer" resultMap="BaseResultMap" >  
+        SELECT   
+       <include refid="Base_Column_List" />  
+       FROM user  
+       WHERE id = #{id}  
+    </select>  
+  	<select id="get" parameterType="com.lq.bite.entity.User" resultMap="BaseResultMap" > 
+		SELECT 
+		<include refid="Base_Column_List" />  
+		FROM user  
+		<where>
+			1=1
+			<if test="userName != null">and user_name = #{userName}</if> 
+			AND yn = 0 
+		</where>
+  	</select>
+    <insert id="insert" parameterType="com.lq.bite.entity.User" >  
+       INSERT INTO   
+            user  
+            (user_name, password, email,create_date,yn)   
+        VALUES  
+            (#{userName}, #{password}, #{email},NOW(),0)  
+    </insert>  
+      
+    <update id="update" parameterType="com.lq.bite.entity.User" >  
+       UPDATE   
+            user   
+       SET   
+        password = #{password},
+        email = #{email}
+       WHERE   
+            id = #{id}  
+    </update>  
+      
+    <delete id="delete" parameterType="java.lang.Integer" >  
+       DELETE FROM  
+             user   
+       WHERE   
+             id =#{id}  
+    </delete>  
+</mapper>  
