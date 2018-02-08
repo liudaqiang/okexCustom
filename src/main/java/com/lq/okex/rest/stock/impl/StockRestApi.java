@@ -212,7 +212,7 @@ public class StockRestApi implements IStockRestApi {
 			}
 			param += "type=" + type;
 		}
-		String result = httpUtil.requestHttpGet(url_prex, KLINES_URL, param+"&size=5");
+		String result = httpUtil.requestHttpGet(url_prex, KLINES_URL, param+"&size=10");
 		return result;
 	}
 
