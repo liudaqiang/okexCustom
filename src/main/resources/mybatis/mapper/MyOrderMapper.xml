@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >  
+<mapper namespace="com.lq.okex.dao.MyOrderDao" >  
+    <resultMap id="BaseResultMap" type="com.lq.okex.entity.MyOrder" >  
+        <result column="order_id" property="orderId" jdbcType="VARCHAR" />  
+        <result column="buy_price" property="buyPrice" jdbcType="DOUBLE" />  
+        <result column="buy_num" property="buyNum" jdbcType="DOUBLE"/>  
+        <result column="fact_buy_num" property="factBuyNum" jdbcType="DOUBLE"/>
+        <result column="all_buy_price" property="allBuyPrice" jdbcType="DOUBLE" /> 
+        <result column="sell_price" property="sellPrice" jdbcType="DOUBLE"/> 
+        <result column="fact_sell_price" property="factSellPrice" jdbcType="DOUBLE"/> 
+        <result column="all_sell_price" property="allSellPrice" jdbcType="DOUBLE"/> 
+        <result column="profit" property="profit" jdbcType="DOUBLE"/> 
+    </resultMap>  
+      
+    <sql id="Base_Column_List" >  
+        order_id,buy_price,buy_num,fact_buy_num,all_buy_price,sell_price,fact_sell_price,all_sell_price,profit
+    </sql>  
+  
+    <select id="getAll" resultMap="BaseResultMap"  >  
+       SELECT   
+       <include refid="Base_Column_List" />  
+       FROM my_order  
+    </select>  
+  
+    <select id="getOne" parameterType="java.lang.Integer" resultMap="BaseResultMap" >  
+        SELECT   
+       <include refid="Base_Column_List" />  
+       FROM user  
+       WHERE id = #{id}  
+    </select>  
+    
+    
+  	<select id="get" parameterType="com.lq.okex.entity.MyOrder" resultMap="BaseResultMap" > 
+		SELECT 
+		<include refid="Base_Column_List" />  
+		FROM my_order  
+		<where>
+			order_id = #{orderId}
+		</where>
+  	</select>
+    <insert id="insert" parameterType="com.lq.okex.entity.MyOrder" >  
+       INSERT INTO   
+            my_order  
+            (order_id, buy_price, buy_num,fact_buy_num,all_buy_price)   
+        VALUES  
+            (#{orderId}, #{buyPrice}, #{buyNum},#{factBuyNum},#{allBuyPrice})  
+    </insert>  
+      
+    <update id="update" parameterType="com.lq.okex.entity.MyOrder" >  
+       UPDATE   
+            my_order   
+       SET   
+        sell_price = #{sellPrice},
+        fact_sell_price = #{factSellPrice}
+        all_sell_price = #{allSellPrice}
+        profit = #{profit}
+       WHERE   
+            order_id = #{orderId}  
+    </update>  
+    <delete id="delete" parameterType="java.lang.Integer" >  
+       DELETE FROM  
+             user   
+       WHERE   
+             id =#{id}  
+    </delete>  
+</mapper>  

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.http.HttpException;
 
+import com.alibaba.fastjson.JSONObject;
 import com.lq.okex.rest.stock.IStockRestApi;
 import com.lq.okex.rest.stock.impl.StockRestApi;
 
@@ -47,16 +48,18 @@ public class StockClient {
 //
 //		// 现货OKCoin历史交易信息
 //		stockGet.trades("btc_usd", "20");
-		String a = stockGet.kline("ltc_btc", "5min");
-		System.out.println(a);
+	//	String a = stockGet.kline("ltc_btc", "5min");
+	//	System.out.println(a);
 		// 现货用户信息
-//		stockPost.userinfo();
+		//String a =stockPost.userinfo();
+		//System.out.println(a);
 //
 //		// 现货下单交易
-//		String tradeResult = stockPost.trade("btc_usd", "buy", "50", "0.02");
-//		System.out.println(tradeResult);
-//		JSONObject tradeJSV1 = JSONObject.parseObject(tradeResult);
-//		String tradeOrderV1 = tradeJSV1.getString("order_id");
+		String tradeResult = stockPost.trade("ltc_usdt", "buy", "130", "0.1");
+		System.out.println(tradeResult);
+		JSONObject tradeJSV1 = JSONObject.parseObject(tradeResult);
+		String tradeOrderV1 = tradeJSV1.getString("order_id");
+		System.out.println(tradeOrderV1);
 //
 //		// 现货获取用户订单信息
 //		stockPost.order_info("btc_usd", tradeOrderV1);

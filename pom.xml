@@ -6,7 +6,7 @@
 	<groupId>com.lq</groupId>
 	<artifactId>okexCustom</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>okexCustom</name>
 	<description>Demo project for Spring Boot</description>
